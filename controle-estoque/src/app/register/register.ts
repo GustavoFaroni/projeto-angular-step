@@ -31,7 +31,7 @@ export class Register {
     this.isSubmitting = true;
 
     this.auth
-      .register({ nome: this.nome, email: this.email, cargo: this.cargo, password: this.password })
+      .registrar({ nome: this.nome, email: this.email, cargo: this.cargo, password: this.password })
       .subscribe({
         next: () => {
           this.message = 'Cadastro realizado com sucesso. Você pode fazer login agora.';
@@ -40,7 +40,7 @@ export class Register {
             this.router.navigate(['/login']);
           }, 1200);
         },
-        error: (err) => {
+        error: (err: { error: { message: string; }; }) => {
           this.error = err?.error?.message || 'Erro ao registrar. Tente novamente.';
           this.isSubmitting = false;
         },

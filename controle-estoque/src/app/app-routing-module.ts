@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Login } from './login/login';
+import { Login } from './pages/login/login';
+import { PainelAdmin } from './pages/painel-admin/painel-admin';
+import { Dashboard } from './pages/dashboard/dashboard';
+import { AuthGuard } from './guardioes/auth-guard';
 import { Register } from './register/register';
-import { Dashboard } from './dashboard/dashboard';
-import { PainelAdmin } from './painel-admin/painel-admin';
-import { Estoque } from './estoque/estoque';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: 'login', component: Login},
-  {path: 'register', component: Register},
-  {path: 'dashboard', component: Dashboard},
-  {path: 'painel-admin', component: PainelAdmin},
-  {path: 'estoque', component: Estoque}
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: Login },
+  { path: 'dashboard', component: Dashboard, canActivate: [AuthGuard] },
+  { path: 'painel-admin', component: PainelAdmin, canActivate: [AuthGuard] },
+  { path: 'register', component: Register},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

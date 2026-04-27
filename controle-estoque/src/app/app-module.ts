@@ -1,19 +1,27 @@
 import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
-import { PainelAdmin } from './painel-admin/painel-admin';
-import { Dashboard } from './dashboard/dashboard';
+import { PainelAdmin } from './pages/painel-admin/painel-admin';
+import { Dashboard } from './pages/dashboard/dashboard';
 import { Estoque } from './estoque/estoque';
-import { Login } from './login/login';
+import { Login } from './pages/login/login';
 import { Register } from './register/register';
 
 @NgModule({
   declarations: [App, PainelAdmin, Dashboard, Estoque, Login, Register],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatCardModule,
+  ],
   providers: [provideBrowserGlobalErrorListeners(), provideClientHydration(withEventReplay())],
   bootstrap: [App],
 })
