@@ -43,10 +43,15 @@ export const routes: Routes = [
       import('./pages/cadastro-usuario/cadastro-usuario').then(
         (m) => m.CadastroUsuario
       ),
-  },  
+  },
+  {
+    path: 'rxjs-busca',
+    loadComponent: () =>
+      import('./pages/busca-produtos/busca-produtos')
+        .then(m => m.BuscaProdutos)
+  },
   {
     path: '**',
     redirectTo: 'produtos',
   }
 ];
-          
