@@ -38,6 +38,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'cadastro-usuario',
+    loadComponent: () =>
+      import('./pages/cadastro-usuario/cadastro-usuario').then(
+        (m) => m.CadastroUsuario
+      ),
+  },  
+  {
     path: '**',
     redirectTo: 'produtos',
   }
