@@ -1,13 +1,24 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth } from '../../services/auth';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
- 
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-login',
-  standalone: false,
+  standalone: true,
   templateUrl: './login.html',
-  styleUrls: ['./login.css'], // corrigido
+  styleUrls: ['./login.css'],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
 })
 export class Login {
   errorMessage: string | undefined;
@@ -23,14 +34,14 @@ export class Login {
   });
 
   login() {
-    this.auth.login(this.loginForm.value, '').subscribe({
+    this.auth.login(this.loginForm.value).subscribe({
       next: (response: any) => {
-        localStorage.setItem('token', response.token);
+        this.auth.saveToken(response.token);
+        this.auth.saveCargo(response.cargo || 'administrador');
         this.router.navigate(['/dashboard']);
       },
       error: (respostaErro: any) => {
         this.errorMessage = respostaErro.error.error;
-        alert(this.errorMessage);
       },
     });
   }

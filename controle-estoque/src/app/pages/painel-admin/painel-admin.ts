@@ -1,24 +1,15 @@
-// colocar no paineladmin.ts
 import { Component } from '@angular/core';
-import { Auth } from '../../services/auth';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Register } from '../../register/register';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-painel-admin',
-  standalone: false,
+  standalone: true,
   templateUrl: './painel-admin.html',
   styleUrl: './painel-admin.css',
+  imports: [Register, RouterLink],
 })
 export class PainelAdmin {
-  constructor(private auth: Auth) {}
-
-  loginForm = new FormGroup({
-    nome: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
-    cargo: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-  });
-
-  registrar() {}
+  constructor() {}
 }
  

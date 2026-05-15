@@ -1,49 +1,60 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { Auth } from '../services/auth';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
-  standalone: false,
+  standalone: true,
   templateUrl: './register.html',
-  styleUrl: './register.css',
+  styleUrls: ['./register.css'],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+  ],
 })
 export class Register {
-  nome = '';
-  email = '';
-  cargo = '';
-  password = '';
   message = '';
   error = '';
   isSubmitting = false;
 
-  constructor(private auth: Auth, private router: Router) {}
+  constructor(private auth: Auth) {}
+
+  registerForm = new FormGroup({
+    nome: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    cargo: new FormControl('', Validators.required),
+    password: new FormControl('', [Validators.required, Validators.minLength(4)]),
+  });
 
   register() {
-    this.error = '';
-    this.message = '';
-
-    if (!this.nome || !this.email || !this.cargo || !this.password) {
-      this.error = 'Por favor preencha todos os campos.';
+    if (this.registerForm.invalid) {
+      this.error = 'Por favor, preencha todos os campos corretamente.';
       return;
     }
 
+    this.error = '';
+    this.message = '';
     this.isSubmitting = true;
 
-    this.auth
-      .registrar({ nome: this.nome, email: this.email, cargo: this.cargo, password: this.password })
-      .subscribe({
-        next: () => {
-          this.message = 'Cadastro realizado com sucesso. Você pode fazer login agora.';
-          this.isSubmitting = false;
-          setTimeout(() => {
-            this.router.navigate(['/login']);
-          }, 1200);
-        },
-        error: (err: { error: { message: string; }; }) => {
-          this.error = err?.error?.message || 'Erro ao registrar. Tente novamente.';
-          this.isSubmitting = false;
-        },
-      });
+    this.auth.registrar(this.registerForm.value).subscribe({
+      next: () => {
+        this.message = 'Usuário cadastrado com sucesso!';
+        this.isSubmitting = false;
+        this.registerForm.reset({ cargo: '' });
+      },
+      error: (err: any) => {
+        this.error = err?.error?.message || 'Erro ao registrar. Tente novamente.';
+        this.isSubmitting = false;
+      },
+    });
   }
 }

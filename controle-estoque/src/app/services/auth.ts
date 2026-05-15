@@ -5,11 +5,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class Auth {
-  temRole(roleNecessaria: any) {
-    throw new Error('Method not implemented.');
+  estaLogado(): boolean {
+    return !!localStorage.getItem('token');
   }
-  estaLogado() {
-    throw new Error('Method not implemented.');
+
+  getRole(): string | null {
+    return localStorage.getItem('cargo');
+  }
+
+  temRole(roleNecessaria: string): boolean {
+    return this.getRole() === roleNecessaria;
   }
   apiUrl = 'https://projeto-node-step-git-main-fabios-projects-d2648344.vercel.app/api/auth';
   apiKey = 'Step@2025';
@@ -25,13 +30,30 @@ export class Auth {
   }
 
   // essa funcao nesse serviço serve para logar um usuario na API (back end).
-  login(usuario: any, p0: string) {
+  login(usuario: any) {
     return this.http.post(`${this.apiUrl}/login`, usuario, { headers: this.headers });
   }
 
+  saveToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  saveCargo(cargo: string) {
+    localStorage.setItem('cargo', cargo);
+  }
+
   // essa funcao nesse serviço serve para pegar os dados do usuario logado na API (back end) e verificar se ele está logado ou não.
-  me(token: any) {
-    console.log('Verificando token:', token);
-    return this.http.post(`${this.apiUrl}/me`, token, { headers: this.headers });
+  me(token: string) {
+    const headers = this.headers.set('Authorization', `Bearer ${token}`);
+    return this.http.post(`${this.apiUrl}/me`, { token }, { headers });
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('cargo');
   }
 }

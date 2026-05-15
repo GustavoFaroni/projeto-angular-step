@@ -1,24 +1,35 @@
 <div class="register-container">
-  <h2>Registro</h2>
+  <div *ngIf="message" class="success-message">{{ message }}</div>
+  <div *ngIf="error" class="error-message">{{ error }}</div>
 
-  <div *ngIf="message" class="success">{{ message }}</div>
-  <div *ngIf="error" class="error">{{ error }}</div>
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nome Completo</mat-label>
+      <input matInput type="text" formControlName="nome" placeholder="Nome Completo" />
+    </mat-form-field>
 
-  <input type="text" [(ngModel)]="nome" placeholder="Nome" />
-  <input type="email" [(ngModel)]="email" placeholder="Email" />
-  <select [(ngModel)]="cargo">
-    <option value="">Selecione um cargo</option>
-    <option value="operacional">Operacional</option>
-    <option value="gerente">Gerente</option>
-    <option value="administrador">Administrador</option>
-  </select>
-  <input type="password" [(ngModel)]="password" placeholder="Senha" />
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>E-mail</mat-label>
+      <input matInput type="email" formControlName="email" placeholder="E-mail" />
+    </mat-form-field>
 
-  <button (click)="register()" [disabled]="isSubmitting">
-    {{ isSubmitting ? 'Registrando...' : 'Registrar' }}
-  </button>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Cargo</mat-label>
+      <mat-select formControlName="cargo">
+        <mat-option value="">Selecione um cargo</mat-option>
+        <mat-option value="operacional">Operacional</mat-option>
+        <mat-option value="gerente">Gerente</mat-option>
+        <mat-option value="administrador">Administrador</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <p class="link-row">
-    <a routerLink="/login">Entrar</a>
-  </p>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Senha</mat-label>
+      <input matInput type="password" formControlName="password" placeholder="Senha" />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting || registerForm.invalid">
+      {{ isSubmitting ? 'Cadastrando...' : 'Cadastrar Usuário' }}
+    </button>
+  </form>
 </div>
