@@ -42,12 +42,3 @@ ng serve
 ```
 Após o comando, abra o seu navegador e acesse: `http://localhost:4200/`. A página será atualizada automaticamente se você fizer alterações no código.
 
-## 🧪 Testes
-
-Para executar os testes unitários com o runner Vitest, utilize:
-```bash
-ng test
-```
-
----
-Desenvolvido com ❤️ como projeto Angular.
