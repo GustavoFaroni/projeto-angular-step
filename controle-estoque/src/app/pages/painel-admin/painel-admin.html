@@ -1,10 +1,27 @@
-<div class="painel-admin-container">
-  <div class="header-admin">
-    <h1>Painel Administrativo</h1>
-    <button routerLink="/dashboard" class="btn-voltar">Voltar ao Dashboard</button>
+<div class="admin-page-wrapper">
+  <div class="admin-content">
+    <div class="admin-header">
+      <h1>Painel Administrativo</h1>
+      <button mat-stroked-button color="primary" routerLink="/dashboard" class="btn-back">
+        <mat-icon>arrow_back</mat-icon>
+        Voltar
+      </button>
+    </div>
+
+    <mat-card class="admin-card">
+      <mat-card-header>
+        <mat-card-title class="card-title">
+          <mat-icon>person_add</mat-icon>
+          Cadastrar Novo Usuário
+        </mat-card-title>
+        <mat-card-subtitle class="description">
+          Gerencie o acesso de novos colaboradores ao sistema de controle de estoque.
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <app-register></app-register>
+      </mat-card-content>
+    </mat-card>
   </div>
-  <hr />
-  <p class="description">Área restrita para gerenciamento de usuários do sistema.</p>
-  <h3>Cadastrar Novo Usuário</h3>
-  <app-register></app-register>
 </div>

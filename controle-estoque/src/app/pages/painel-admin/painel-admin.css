@@ -1,0 +1,55 @@
+.admin-page-wrapper {
+  min-height: 100vh;
+  background-color: #f4f7f6;
+  padding: 40px 20px;
+}
+
+.admin-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.admin-header h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.admin-card {
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: none;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.card-title mat-icon {
+  color: #1976d2;
+}
+
+.description {
+  color: #666;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.btn-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

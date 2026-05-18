@@ -1,59 +1,42 @@
-.register-container {
-  max-width: 360px;
-  margin: 48px auto;
+.register-wrapper {
   padding: 24px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background: #fff;
+  background-color: white;
+  border-radius: 12px;
 }
 
-.register-container h2 {
-  margin-bottom: 16px;
-  font-size: 1.4rem;
-  text-align: center;
-}
-
-.register-container input, .register-container select {
+.full-width {
   width: 100%;
-  padding: 10px 12px;
-  margin-bottom: 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
+  margin-bottom: 8px;
 }
 
-.register-container button {
+.register-button {
   width: 100%;
-  padding: 10px 12px;
-  border: none;
+  padding: 8px;
+  font-size: 16px;
+  height: 48px;
+  margin-top: 16px;
+}
+
+.message-banner {
+  padding: 12px;
   border-radius: 6px;
-  background: #1976d2;
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.register-container button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.register-container .success {
-  margin-bottom: 12px;
-  color: #1d7a36;
-}
-
-.register-container .error {
-  margin-bottom: 12px;
-  color: #b00020;
-}
-
-.register-container .link-row {
-  margin-top: 14px;
+  margin-bottom: 20px;
+  font-size: 14px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
-.register-container a {
-  color: #1976d2;
-  text-decoration: none;
+.success-message {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
 }
